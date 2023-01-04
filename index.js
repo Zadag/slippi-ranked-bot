@@ -7,6 +7,7 @@ const path = require("node:path");
 const token = process.env.DISCORD_TOKEN;
 const Sequelize = require("sequelize");
 const Users = require("./Models/Users");
+const updateDB = require('./updatedb');
 
 // Initiate client
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
@@ -58,6 +59,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
 client.once(Events.ClientReady, (c) => {
   Users.sync();
   console.log(`Ready! Logged in as ${c.user.tag}`);
+  setInterval(updateDB, (1000 * 60))
 });
 
 client.login(token);
