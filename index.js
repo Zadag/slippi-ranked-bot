@@ -59,7 +59,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
 client.once(Events.ClientReady, (c) => {
   Users.sync();
   console.log(`Ready! Logged in as ${c.user.tag}`);
-  setInterval(updateDB, (1000 * 60))
+  setInterval(updateDB, (1000 * 60 * 60));
 });
 
 client.login(token);
