@@ -60,18 +60,18 @@ module.exports = {
 
         const rank = ratingToRanks(points, dailyGlobalPlacement);
         // Generate canvas
-        const relPath =
-          "/Users/kevinbrowne/Documents/Discord_bots/first_bot/assets/";
+        const relPath = __dirname.substring(0, __dirname.lastIndexOf("/"));
+        const resolvedPath = path.join(relPath, "assets");
         const canvas = Canvas.createCanvas(700, 250);
         const context = canvas.getContext("2d");
         const background = await Canvas.loadImage(
-          path.join(relPath, "darkbackground.jpg")
+          path.join(resolvedPath, "darkbackground.jpg")
         );
         context.drawImage(background, 0, 0, canvas.width, canvas.height);
         context.strokeStyle = "#0099ff";
         context.strokeRect(0, 0, canvas.width, canvas.height);
         const rankImage = await Canvas.loadImage(
-          path.join(relPath, `${rankImgPath(ratingToRanks(points))}.png`)
+          path.join(resolvedPath, `${rankImgPath(ratingToRanks(points))}.png`)
         );
         context.drawImage(rankImage, 20, 20, 200, 200);
         context.font = applyText(
