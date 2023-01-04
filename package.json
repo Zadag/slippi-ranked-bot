@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@napi-rs/canvas": "^0.1.31",
+    "discord.js": "^14.7.1",
+    "dotenv": "^16.0.3",
+    "sequelize": "^6.28.0",
+    "sqlite3": "^5.1.4",
+    "undici": "^5.14.0"
+  }
+}
