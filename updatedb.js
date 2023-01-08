@@ -5,15 +5,16 @@ const updateDB = async () => {
     const users = await Users.findAll();
     for (const user of users) {
         console.log(user.get('slippiname'))
-        const {points, dailyGlobalPlacement, displayName} = await fetchPlayerData(user.get('slippiname'));
-        console.log('updating', points, dailyGlobalPlacement, displayName);
+        const slippiName = user.get("slippiname");
+        const {points, dailyGlobalPlacement} = await fetchPlayerData(user.get('slippiname'));
+        console.log('updating', points, dailyGlobalPlacement, slippiName);
         await Users.update(
             { slippielo: points },
-            { where: { slippiname: displayName } }
+            { where: { slippiname: slippiName } }
           );
           await Users.update(
             { slippiglobalplacement: dailyGlobalPlacement },
-            { where: { slippiname: displayName } }
+            { where: { slippiname: slippiName } }
           );
     }
     return console.log('elo updated');
