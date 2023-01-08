@@ -49,6 +49,7 @@ module.exports = {
           );
         }
         const { points, dailyGlobalPlacement, displayName } = data;
+
         await Users.update(
           { slippielo: points },
           { where: { username: userName } }
@@ -57,6 +58,7 @@ module.exports = {
           { slippiglobalplacement: dailyGlobalPlacement },
           { where: { username: userName } }
         );
+        console.log('here', points, dailyGlobalPlacement);
 
         const rank = ratingToRanks(points, dailyGlobalPlacement);
         // Generate canvas
@@ -71,7 +73,7 @@ module.exports = {
         context.strokeStyle = "#0099ff";
         context.strokeRect(0, 0, canvas.width, canvas.height);
         const rankImage = await Canvas.loadImage(
-          path.join(resolvedPath, `${rankImgPath(ratingToRanks(points))}.png`)
+          path.join(resolvedPath, `${rankImgPath(ratingToRanks(points, dailyGlobalPlacement))}.png`)
         );
         context.drawImage(rankImage, 20, 20, 200, 200);
         context.font = applyText(
@@ -87,7 +89,7 @@ module.exports = {
         context.font = "40px sans-serif";
         context.fillStyle = "#ffffff";
         context.fillText(
-          `${ratingToRanks(points)} ${points}`,
+          `${ratingToRanks(points, dailyGlobalPlacement)} ${points}`,
           canvas.width / 2.5,
           canvas.height / 1.5
         );

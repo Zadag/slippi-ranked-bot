@@ -4,7 +4,9 @@ const fetchPlayerData = require('./fetchPlayerData');
 const updateDB = async () => {
     const users = await Users.findAll();
     for (const user of users) {
-        const {points, dailyGlobalPlacement, displayName} = fetchPlayerData(user.get('slippiname'));
+        console.log(user.get('slippiname'))
+        const {points, dailyGlobalPlacement, displayName} = await fetchPlayerData(user.get('slippiname'));
+        console.log('updating', points, dailyGlobalPlacement, displayName);
         await Users.update(
             { slippielo: points },
             { where: { slippiname: displayName } }

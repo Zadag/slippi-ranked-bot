@@ -1,6 +1,6 @@
 const ratingToRanks = (rating, dailyGlobalPlacement) => {
-  if (dailyGlobalPlacement < 300 && dailyGlobalPlacement !== null)
-    return "Grandmaster";
+  console.log(dailyGlobalPlacement, 'stop');
+  if (dailyGlobalPlacement) return "Grandmaster";
   if (rating < 765) return "Bronze 1";
   if (rating < 913) return "Bronze 2";
   if (rating < 1054) return "Bronze 3";

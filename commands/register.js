@@ -21,6 +21,7 @@ module.exports = {
 
     try {
       // equivalent to: INSERT INTO tags (name, description, username) values (?, ?, ?);
+      console.log('registering', userName, userId, slippiName);
       const user = await Users.create({
         username: userName,
         userid: userId,
