@@ -1,10 +1,11 @@
 const { SlashCommandBuilder } = require("discord.js");
 const sequelize = require("../database");
+const Characters = require("../Models/Characters");
 const Users = require("../Models/Users");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("register")
+    .setName("test_register")
     .setDescription("Registers user with the ranked bot.")
     .addStringOption((option) =>
       option
@@ -21,7 +22,7 @@ module.exports = {
 
     try {
       // equivalent to: INSERT INTO tags (name, description, username) values (?, ?, ?);
-      console.log('registering', userName, userId, slippiName);
+      console.log("registering", userName, userId, slippiName);
       const user = await Users.create({
         username: userName,
         userid: userId,
@@ -29,7 +30,11 @@ module.exports = {
         slippielo: 0,
         slippiglobalplacement: null,
       });
-
+      console.log("after user created");
+      const characters = await Characters.create({
+        slippiname: slippiName,
+      });
+      console.log("after characters created");
       await interaction.reply(
         `${interaction.user.username} has registered with the bot.`
       );

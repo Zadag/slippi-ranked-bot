@@ -4,7 +4,7 @@ const Users = require("../Models/Users");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("slippi_tag")
+    .setName("test_slippi_tag")
     .setDescription("Get somebody's slippi connect code.")
     .addUserOption((option) =>
       option

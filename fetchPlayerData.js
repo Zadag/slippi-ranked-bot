@@ -1,4 +1,5 @@
 const { fetch } = require("undici");
+const { RateLimiter } = require("limiter");
 
 const getPlayerData = async (connectCode) => {
   const query = `fragment userProfilePage on User {
@@ -53,7 +54,10 @@ const getPlayerData = async (connectCode) => {
   return req.json();
 };
 
+const limiter = new RateLimiter({ tokensPerInterval: 1, interval: 1000 });
+
 const fetchPlayerData = async (connectCode) => {
+  limiter.removeTokens(1);
   const data = await getPlayerData(connectCode);
   const stuff = await data;
   console.log(stuff);
@@ -69,7 +73,11 @@ const fetchPlayerData = async (connectCode) => {
     stuff.data.getConnectCode.user.rankedNetplayProfile.ratingOrdinal
   );
   const displayName = stuff.data.getConnectCode.user.displayName;
-  return { points, dailyGlobalPlacement, displayName };
+
+  const characters =
+    stuff.data.getConnectCode.user.rankedNetplayProfile.characters;
+
+  return { points, dailyGlobalPlacement, displayName, characters };
 };
 
 module.exports = fetchPlayerData;

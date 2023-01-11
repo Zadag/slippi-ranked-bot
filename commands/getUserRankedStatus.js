@@ -1,6 +1,7 @@
 const { SlashCommandBuilder, AttachmentBuilder } = require("discord.js");
 const ratingToRanks = require("../ratingToRanks");
 const Users = require("../Models/Users");
+const Characters = require("../Models/Characters");
 const fetchPlayerData = require("../fetchPlayerData");
 const Canvas = require("@napi-rs/canvas");
 const path = require("node:path");
@@ -24,7 +25,7 @@ const applyText = (canvas, text) => {
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("rank")
+    .setName("test_rank")
     .setDescription("Replies with current ranked details")
     .addUserOption((option) =>
       option
@@ -48,7 +49,7 @@ module.exports = {
             `${slippiname} is not a valid slippi name.`
           );
         }
-        const { points, dailyGlobalPlacement, displayName } = data;
+        const { points, dailyGlobalPlacement, characters } = data;
 
         await Users.update(
           { slippielo: points },
@@ -58,7 +59,7 @@ module.exports = {
           { slippiglobalplacement: dailyGlobalPlacement },
           { where: { username: userName } }
         );
-        console.log('here', points, dailyGlobalPlacement);
+        console.log("here", points, dailyGlobalPlacement);
 
         const rank = ratingToRanks(points, dailyGlobalPlacement);
         // Generate canvas
@@ -73,7 +74,10 @@ module.exports = {
         context.strokeStyle = "#0099ff";
         context.strokeRect(0, 0, canvas.width, canvas.height);
         const rankImage = await Canvas.loadImage(
-          path.join(resolvedPath, `${rankImgPath(ratingToRanks(points, dailyGlobalPlacement))}.png`)
+          path.join(
+            resolvedPath,
+            `${rankImgPath(ratingToRanks(points, dailyGlobalPlacement))}.png`
+          )
         );
         context.drawImage(rankImage, 20, 20, 200, 200);
         context.font = applyText(
