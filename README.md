@@ -28,9 +28,14 @@ If you are familiar with Git go ahead and clone this repository. Otherwise selec
 
 ## Setting up the bot
 
-In order to run this bot you will need to add a bot to your discord account, then add create a file called .env in the root directory that contains your discord API key and your bot's client ID. For instructions on how to do this read the Creating an app and Configuring a bot sections of [this tutorial](https://discord.com/developers/docs/getting-started#creating-an-app)
+In order to run this bot you will need to add a bot to your discord account, then create a file called .env in the root directory that contains your discord secret token and your bot's client ID. For instructions on how to do this read the Creating an app and Configuring a bot sections of [this tutorial](https://discord.com/developers/docs/getting-started#creating-an-app)
 
-Once you've provided your discord API key and client ID you can invite the bot to a server by [generating an invite link](https://discordapi.com/permissions.html#517544074304).
+Once you've created a .env file and provided your discord API key and client ID in the following format
+
+$ DISCORD_TOKEN = "xxxxxxxxxxxxxxxxxxxxxxxx"
+$ CLIENT_ID = "xxxxxxxxxxxxx"
+
+you can invite the bot to a server by [generating an invite link](https://discordapi.com/permissions.html#517544074304).
 
 ## Running the bot
 
