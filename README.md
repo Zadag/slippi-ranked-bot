@@ -32,8 +32,8 @@ In order to run this bot you will need to add a bot to your discord account, the
 
 Once you've created a .env file and provided your discord API key and client ID in the following format
 
-$ DISCORD_TOKEN = "xxxxxxxxxxxxxxxxxxxxxxxx"
-$ CLIENT_ID = "xxxxxxxxxxxxx"
+    $ DISCORD_TOKEN = "xxxxxxxxxxxxxxxxxxxxxxxx"
+    $ CLIENT_ID = "xxxxxxxxxxxxx"
 
 you can invite the bot to a server by [generating an invite link](https://discordapi.com/permissions.html#517544074304).
 
