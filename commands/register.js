@@ -5,7 +5,7 @@ const Users = require("../Models/Users");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("test_register")
+    .setName("register")
     .setDescription("Registers user with the ranked bot.")
     .addStringOption((option) =>
       option
@@ -30,11 +30,11 @@ module.exports = {
         slippielo: 0,
         slippiglobalplacement: null,
       });
-      console.log("after user created");
+      // Create Character model
       const characters = await Characters.create({
         slippiname: slippiName,
       });
-      console.log("after characters created");
+
       await interaction.reply(
         `${interaction.user.username} has registered with the bot.`
       );

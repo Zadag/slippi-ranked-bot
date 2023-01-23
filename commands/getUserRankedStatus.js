@@ -25,7 +25,7 @@ const applyText = (canvas, text) => {
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("test_rank")
+    .setName("rank")
     .setDescription("Replies with current ranked details")
     .addUserOption((option) =>
       option

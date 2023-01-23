@@ -3,11 +3,12 @@ const Users = require("../Models/Users");
 const Characters = require("../Models/Characters");
 const ratingToRanks = require("../ratingToRanks");
 const Canvas = require("@napi-rs/canvas");
+const config = require("../bot-config");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("test_leaderboard")
-    .setDescription("Show the docs leaderboard"),
+    .setName("leaderboard")
+    .setDescription("Show the leaderboard"),
   async execute(interaction) {
     const users = await Users.findAll();
     const ladder = [];
@@ -32,7 +33,7 @@ module.exports = {
         }
       }
       console.log(maxProp);
-      if (maxProp === "DR_MARIO") {
+      if (maxProp === config.character) {
         ladder.push({
           user: user.get("username"),
           elo: user.get("slippielo"),
@@ -55,7 +56,7 @@ module.exports = {
     const joined = descString.join("\n");
     const embed = {
       color: 0x0099ff,
-      title: "The Docs",
+      title: config.leaderboard_title,
       description: joined,
     };
 

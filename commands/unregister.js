@@ -5,7 +5,7 @@ const Characters = require("../Models/Characters");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("test_unregister")
+    .setName("unregister")
     .setDescription("Remove yourself from the DocBot"),
   async execute(interaction) {
     const userName = interaction.user.username;
