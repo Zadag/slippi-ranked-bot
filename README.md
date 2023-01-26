@@ -41,6 +41,7 @@ you can invite the bot to a server by [generating an invite link](https://discor
 
 Open up a terminal, navigate to the root directory of this bot (the folder you dragged the zipped files into)
 The first time you run this bot you will need to run the following command to download dependencies
+    
     $ npm install
 
 After that run the following commands to start hosting the bot
