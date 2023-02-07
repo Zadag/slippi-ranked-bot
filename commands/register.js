@@ -1,5 +1,4 @@
 const { SlashCommandBuilder } = require("discord.js");
-const sequelize = require("../database");
 const Characters = require("../Models/Characters");
 const Users = require("../Models/Users");
 

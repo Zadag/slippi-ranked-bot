@@ -2,7 +2,6 @@ const { SlashCommandBuilder, Embed, EmbedBuilder } = require("discord.js");
 const Users = require("../Models/Users");
 const Characters = require("../Models/Characters");
 const ratingToRanks = require("../ratingToRanks");
-const Canvas = require("@napi-rs/canvas");
 const config = require("../bot-config");
 
 module.exports = {

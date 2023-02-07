@@ -1,7 +1,6 @@
 const { SlashCommandBuilder, AttachmentBuilder } = require("discord.js");
 const ratingToRanks = require("../ratingToRanks");
 const Users = require("../Models/Users");
-const Characters = require("../Models/Characters");
 const fetchPlayerData = require("../fetchPlayerData");
 const Canvas = require("@napi-rs/canvas");
 const path = require("node:path");
