@@ -7,6 +7,8 @@ const updateDB = async () => {
   for (const user of users) {
     console.log(user.get("slippiname"));
     const slippiName = user.get("slippiname");
+
+    // Update elo and global placement in Users
     const { points, dailyGlobalPlacement, characters } = await fetchPlayerData(
       user.get("slippiname")
     );
@@ -27,6 +29,7 @@ const updateDB = async () => {
       { where: { slippiname: slippiName } }
     );
 
+    // Update character usage in Characters
     const charactersModel = await Characters.findOne({
       where: { slippiname: slippiName },
     });
