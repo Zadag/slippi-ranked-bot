@@ -62,7 +62,7 @@ client.once(Events.ClientReady, (c) => {
   Characters.sync();
   History.sync();
   console.log(`Ready! Logged in as ${c.user.tag}`);
-  setInterval(updateDB, 1000 * 30);
+  setInterval(updateDB, 1000 * 60 * 120);
 });
 
 client.login(token);
