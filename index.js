@@ -8,6 +8,7 @@ const token = process.env.DISCORD_TOKEN;
 const Sequelize = require("sequelize");
 const Users = require("./Models/Users");
 const Characters = require("./Models/Characters");
+const History = require("./Models/History");
 const updateDB = require("./updatedb");
 
 // Initiate client
@@ -59,8 +60,9 @@ client.on(Events.InteractionCreate, async (interaction) => {
 client.once(Events.ClientReady, (c) => {
   Users.sync();
   Characters.sync();
+  History.sync();
   console.log(`Ready! Logged in as ${c.user.tag}`);
-  setInterval(updateDB, 1000 * 60 * 120);
+  setInterval(updateDB, 1000 * 30);
 });
 
 client.login(token);
