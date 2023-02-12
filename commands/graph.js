@@ -1,6 +1,7 @@
 const { SlashCommandBuilder } = require("discord.js");
 const History = require("../Models/History");
 const Users = require("../Models/Users");
+const QuickChart = require("quickchart-js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -24,21 +25,38 @@ module.exports = {
     console.log("here", user, slippiName);
 
     try {
-      const datapoints = await History.findAll({
+      const data = await History.findAll({
         attributes: ["slippielo", "date"],
         where: { slippiname: slippiName },
         order: [["date", "DESC"]],
         limit: 5,
       });
-      if (datapoints) {
-        console.log(datapoints);
-        return await interaction.reply(
-          `Success!  datapoints are ${
-            (datapoints[0].dataValues.slippielo, datapoints[0].dataValues.date)
-          } ${datapoints[1].dataValues.slippielo} ${
-            datapoints[4].dataValues.slippielo
-          }`
+      if (data) {
+        const datapoints = data.reduce(
+          (acc, curr) => {
+            acc.eloscores.push(curr.dataValues.slippielo);
+            acc.dates.push(curr.dataValues.date.toString());
+            return acc;
+          },
+          { eloscores: [], dates: [] }
         );
+        chartConfig = {
+          type: "line",
+          data: {
+            //labels: ["9th", "10th"],
+            datasets: [
+              {
+                label: `${userName}`,
+                data: datapoints.eloscores.map((elo) => elo),
+              },
+            ],
+          },
+        };
+        const chart = new QuickChart();
+        chart.setConfig(chartConfig);
+
+        console.log(datapoints);
+        return await interaction.reply(chart.getUrl());
       } else {
         return await interaction.reply(`${userName} is not registered`);
       }
