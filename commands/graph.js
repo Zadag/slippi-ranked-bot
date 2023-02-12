@@ -29,7 +29,7 @@ module.exports = {
         attributes: ["slippielo", "date"],
         where: { slippiname: slippiName },
         order: [["date", "DESC"]],
-        limit: 5,
+        limit: 84,
       });
       if (data) {
         const datapoints = data.reduce(
@@ -44,7 +44,13 @@ module.exports = {
         const { eloscores, dates } = datapoints;
         const uniqueDates = dates
           .map((date) => date.getUTCDate())
-          .filter((date, index, arr) => arr.indexOf(date) === index);
+          .map((date, index, arr) => {
+            return arr.indexOf(date) === index ? date : "";
+          });
+        //.filter((date, index, arr) => arr.indexOf(date) === index);
+
+        uniqueDates.reverse();
+        eloscores.reverse();
 
         chartConfig = {
           type: "line",
@@ -57,11 +63,23 @@ module.exports = {
               },
             ],
           },
+          options: {
+            scales: {
+              yAxes: [
+                {
+                  display: true,
+                  ticks: {
+                    suggestedMin: 3000,
+                  },
+                },
+              ],
+            },
+          },
         };
         const chart = new QuickChart();
         chart.setConfig(chartConfig);
 
-        console.log(datapoints);
+        console.log(uniqueDates, eloscores);
         return await interaction.reply(chart.getUrl());
       } else {
         return await interaction.reply(`${userName} is not registered`);
