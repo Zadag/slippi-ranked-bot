@@ -34,20 +34,26 @@ module.exports = {
       if (data) {
         const datapoints = data.reduce(
           (acc, curr) => {
+            if (Object.keys(acc).length > 12 * 7) return acc;
             acc.eloscores.push(curr.dataValues.slippielo);
-            acc.dates.push(curr.dataValues.date.toString());
+            acc.dates.push(curr.dataValues.date);
             return acc;
           },
           { eloscores: [], dates: [] }
         );
+        const { eloscores, dates } = datapoints;
+        const uniqueDates = dates
+          .map((date) => date.getUTCDate())
+          .filter((date, index, arr) => arr.indexOf(date) === index);
+
         chartConfig = {
           type: "line",
           data: {
-            //labels: ["9th", "10th"],
+            labels: uniqueDates.map((date) => date),
             datasets: [
               {
                 label: `${userName}`,
-                data: datapoints.eloscores.map((elo) => elo),
+                data: eloscores.map((elo) => elo),
               },
             ],
           },
