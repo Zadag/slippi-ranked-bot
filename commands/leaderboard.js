@@ -18,20 +18,22 @@ module.exports = {
         where: { slippiname: slippiName },
       });
       console.log(characters.dataValues, "Characters in leaderboard");
-      console.log(typeof characters.dataValues);
+  
       let maxValue = 0;
       let maxProp;
       for (const prop in characters.dataValues) {
         if (
           characters.dataValues[prop] !== null &&
           characters.dataValues[prop] > maxValue &&
-          prop !== "id"
+          prop !== "id" &&
+          prop !== 'createdAt' &&
+          prop !== 'updatedAt'
         ) {
-          maxValue = characters.dataValues;
+          maxValue = characters.dataValues[prop];
           maxProp = prop;
         }
       }
-      console.log(maxProp);
+      console.log('maxProp, maxValue', maxProp, maxValue);
       if (maxProp === config.character) {
         ladder.push({
           user: user.get("username"),

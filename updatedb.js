@@ -20,8 +20,10 @@ const updateDB = async () => {
       dailyGlobalPlacement,
       slippiName
     );
-    if (!points)
-      return console.log(`Skip update for ${slippiName} tag is undefined`);
+    if (!points) {
+      console.log(`Skip update for ${slippiName} tag is undefined`);
+      continue
+    }
     await Users.update(
       { slippielo: points },
       { where: { slippiname: slippiName } }
@@ -80,9 +82,7 @@ const updateDB = async () => {
       where: { slippiname: slippiName },
     });
 
-    console.log(historys);
-
-    return console.log("elo updated");
+    console.log(`elo updated for ${user}`);
   }
 };
 

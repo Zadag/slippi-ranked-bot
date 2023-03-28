@@ -58,7 +58,7 @@ module.exports = {
           { slippiglobalplacement: dailyGlobalPlacement },
           { where: { username: userName } }
         );
-        console.log("here", points, dailyGlobalPlacement);
+        console.log("here", points, dailyGlobalPlacement, characters);
 
         const rank = ratingToRanks(points, dailyGlobalPlacement);
         // Generate canvas
